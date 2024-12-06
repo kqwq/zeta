@@ -9,8 +9,7 @@
   "author": "kqwq",
   "license": "ISC",
   "dependencies": {
-    "node-turn": "github:kqwq/node-turn",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.51.0"
+    "node-turn": "github:kqwq/node-turn"
   },
   "type": "module"
 }
