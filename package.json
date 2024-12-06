@@ -1,0 +1,15 @@
+{
+  "name": "zeta",
+  "version": "1.0.0",
+  "description": "A multiplayer library for Khan Academy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kqwq",
+  "license": "ISC",
+  "dependencies": {
+    "node-turn": "github:kqwq/node-turn"
+  },
+  "type": "module"
+}
