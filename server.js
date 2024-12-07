@@ -50,10 +50,17 @@ turnServer.onSdpPacket = async (message) => {
 }
 turnServer.start();
 
+
 async function onCompletedMessage(x, hash) {
   console.log("completed message", x);
 
-  fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(x)});`);
+  const obj = JSON.parse(x);
+  const url = obj._;
+  delete obj._;
+  const res = await fetch(url, obj);
+  const text = await res.text();
+
+  fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(text)});`);
   await simpleGit().add(`text/${hash}.js`).commit(`commit ${hash}`).push();
   fs.unlinkSync(`text/${hash}.js`);
 
