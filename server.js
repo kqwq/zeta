@@ -51,7 +51,15 @@ turnServer.onSdpPacket = async (message) => {
 turnServer.start();
 
 
+let lastExecutionTime = 0;
+
 async function onCompletedMessage(x, hash) {
+  const currentTime = Date.now();
+  if (currentTime - lastExecutionTime < 1000) {
+    return;
+  }
+  lastExecutionTime = currentTime;
+
   console.log("completed message", x);
 
   const obj = JSON.parse(x);
@@ -72,11 +80,6 @@ async function onCompletedMessage(x, hash) {
   await simpleGit().push("origin", "main");
   console.log("pushed");
 
-
-  // if (fs.existsSync(`text/${hash}.js`)) {
-  //   fs.unlinkSync(`text/${hash}.js`);
-  // }
-
-  console.log("done"); 
+  console.log("done");
 }
 
