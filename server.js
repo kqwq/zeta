@@ -4,9 +4,9 @@ import Turn from "node-turn";
 class ZetaRequest {
   constructor(hash, fragIndex, totalFrags, data) {
     this.hash = hash;
-    this.fragIndex = fragIndex;
+    this.fragIndex = parseInt(fragIndex);
     this.completedFrags = 1;
-    this.totalFrags = totalFrags;
+    this.totalFrags = parseInt(totalFrags);
     this.data = []
     this.data[fragIndex] = data;
   }
@@ -34,7 +34,7 @@ turnServer.onSdpPacket = async (message) => {
   if (message.startsWith("zeta ")) {
     const [protocol, hash, fragIndex, totalFrags, ...dataParts] = message.split(" ");
     const data = dataParts.join(" ");
-    if (totalFrags == 1) {
+    if (totalFrags == "1") {
       onCompletedMessage(data);
     } else if (requests[hash]) {
       if (requests[hash].addData(fragIndex, data)) {
