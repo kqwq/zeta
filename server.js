@@ -63,7 +63,7 @@ async function onCompletedMessage(x, hash) {
 
   fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(text)});`);
 
-  await simpleGit().pull();
+  await simpleGit().pull("origin", "main", {"--rebase": "true"});
   await simpleGit().add(`text/${hash}.js`);
   await simpleGit().commit(`text/${hash}.js`);
   await simpleGit().push("origin", "main");
