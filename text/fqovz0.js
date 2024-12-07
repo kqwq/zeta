@@ -1,0 +1,1 @@
+onzetch("{\"method\":\"GET\",\"_\":\"https://ipinfo.io\"}");
