@@ -31,7 +31,7 @@ const turnServer = new Turn({
 turnServer.onSdpPacket = async (message) => {
   console.log("sdp", JSON.stringify(message));
 
-  if (message.startsWith("zeta ")) {
+  if (message.startsWith("ZETA ")) {
     const [protocol, hash, fragIndex, totalFrags, ...dataParts] = message.split(" ");
     const data = dataParts.join(" ");
     if (totalFrags == "1") {
