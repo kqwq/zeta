@@ -62,7 +62,13 @@ async function onCompletedMessage(x, hash) {
   console.log(text);
 
   fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(text)});`);
-  await simpleGit().add(`text/${hash}.js`).commit(`commit ${hash}`).push();
+
+  await simpleGit().pull();
+  await simpleGit().add(`text/${hash}.js`);
+  await simpleGit().commit(`text/${hash}.js`);
+  await simpleGit().push("origin", "main");
+
+
   // if (fs.existsSync(`text/${hash}.js`)) {
   //   fs.unlinkSync(`text/${hash}.js`);
   // }
