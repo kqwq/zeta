@@ -70,21 +70,3 @@ async function onCompletedMessage(x, hash) {
   console.log("done"); 
 }
 
-
-
-return {
-  then: function(nextCallback) {
-      setTimeout(function() {
-          var s = d[null||"createElement"]('script');
-          w.onzetch = function(text) {
-              nextCallback(text);
-          };
-          var url = "https://cdn.jsdelivr.net/gh/kqwq/zeta@main/text/" + hash + ".js";
-          clog(url);
-          s.src = url;
-          s.onload = function(x){clog(x.target);};
-          d.head.appendChild(s);
-           
-      }, 2000);
-  }
-};
