@@ -37,10 +37,10 @@ turnServer.onSdpPacket = async (message) => {
     const [protocol, hash, fragIndex, totalFrags, ...dataParts] = message.split(" ");
     const data = dataParts.join(" ");
     if (totalFrags == "1") {
-      onCompletedMessage(data);
+      onCompletedMessage(data, hash);
     } else if (requests[hash]) {
       if (requests[hash].addData(fragIndex, data)) {
-        onCompletedMessage(requests[hash].data.join(""));
+        onCompletedMessage(requests[hash].data.join(""), hash);
         delete requests[hash];
       }
     } else {
@@ -57,5 +57,5 @@ function onCompletedMessage(x, hash) {
   simpleGit().add(`text/${hash}.js`).commit(`commit ${hash}`).push();
   fs.unlinkSync(`text/${hash}.js`);
 
-  
+  console.log("done"); 
 }
