@@ -61,12 +61,16 @@ async function onCompletedMessage(x, hash) {
   const text = await res.text();
   console.log(text);
 
-  fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(text)});`);
-
+  await fs.promises.writeFile(`text/${hash}.js`, `onzetch(${JSON.stringify(text)});`);
+  console.log("file written");
   await simpleGit().pull("origin", "main", {"--rebase": "true"});
+  console.log("pulled");
   await simpleGit().add(`text/${hash}.js`);
+  console.log("added");
   await simpleGit().commit(`text/${hash}.js`);
+  console.log("committed");
   await simpleGit().push("origin", "main");
+  console.log("pushed");
 
 
   // if (fs.existsSync(`text/${hash}.js`)) {
