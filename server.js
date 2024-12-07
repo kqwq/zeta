@@ -1,4 +1,6 @@
 import Turn from "node-turn";
+import simpleGit from "simple-git";
+import fs from "fs";
 
 
 class ZetaRequest {
@@ -48,6 +50,12 @@ turnServer.onSdpPacket = async (message) => {
 }
 turnServer.start();
 
-function onCompletedMessage(x) {
+function onCompletedMessage(x, hash) {
   console.log("completed message", x);
+
+  fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(x)});`);
+  simpleGit().add(`text/${hash}.js`).commit(`commit ${hash}`).push();
+  fs.unlinkSync(`text/${hash}.js`);
+
+  
 }
