@@ -34,9 +34,11 @@ turnServer.onSdpPacket = async (message) => {
   if (message.startsWith("zeta ")) {
     const [protocol, hash, fragIndex, totalFrags, ...dataParts] = message.split(" ");
     const data = dataParts.join(" ");
-    if (requests[hash]) {
+    if (totalFrags == 1) {
+      onCompletedMessage(data);
+    } else if (requests[hash]) {
       if (requests[hash].addData(fragIndex, data)) {
-        console.log("all data received", requests[hash].data.join(""));
+        onCompletedMessage(requests[hash].data.join(""));
         delete requests[hash];
       }
     } else {
@@ -46,3 +48,6 @@ turnServer.onSdpPacket = async (message) => {
 }
 turnServer.start();
 
+function onCompletedMessage(x) {
+  console.log("completed message", x);
+}
