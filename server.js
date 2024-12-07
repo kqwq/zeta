@@ -59,10 +59,32 @@ async function onCompletedMessage(x, hash) {
   delete obj._;
   const res = await fetch(url, obj);
   const text = await res.text();
+  console.log(text);
 
   fs.writeFileSync(`text/${hash}.js`, `onzetch(${JSON.stringify(text)});`);
   await simpleGit().add(`text/${hash}.js`).commit(`commit ${hash}`).push();
-  fs.unlinkSync(`text/${hash}.js`);
+  if (fs.existsSync(`text/${hash}.js`)) {
+    fs.unlinkSync(`text/${hash}.js`);
+  }
 
   console.log("done"); 
 }
+
+
+
+return {
+  then: function(nextCallback) {
+      setTimeout(function() {
+          var s = d[null||"createElement"]('script');
+          w.onzetch = function(text) {
+              nextCallback(text);
+          };
+          var url = "https://cdn.jsdelivr.net/gh/kqwq/zeta@main/text/" + hash + ".js";
+          clog(url);
+          s.src = url;
+          s.onload = function(x){clog(x.target);};
+          d.head.appendChild(s);
+           
+      }, 2000);
+  }
+};
