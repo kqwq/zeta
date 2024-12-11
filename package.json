@@ -9,8 +9,8 @@
   "author": "kqwq",
   "license": "ISC",
   "dependencies": {
-    "node-turn": "github:kqwq/node-turn",
-    "simple-git": "^3.27.0"
+    "canvas": "^3.0.0-rc3",
+    "node-turn": "github:kqwq/node-turn"
   },
   "type": "module"
 }
